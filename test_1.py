@@ -7,7 +7,6 @@ from tkinter import ttk
 
 
 
-# Оновлення коду при запуску програми.
 # URL вашого репозиторію на GitHub
 GITHUB_REPO = "https://github.com/goldplayer/u_24_exe_.git"
 # Локальний шлях до директорії з репозиторієм
@@ -24,19 +23,18 @@ def update_from_github(repo_url, local_path):
         print("Оновлюємо репозиторій...")
         repo = git.Repo(local_path)
         origin = repo.remotes.origin
-        origin.pull()
+        origin.pull()  # Оновлюємо репозиторій
     print("Репозиторій синхронізовано.")
     print("Содержимое директории 'repo':", os.listdir(local_path))
 
-def restart_program():
+def run_program():
     """
-    Перезапускає оновлену версію програми.
+    Запускає оновлену програму.
     """
     script_path = os.path.join(LOCAL_REPO_PATH, "test_1.py")
     print(f"Пытаемся запустить файл: {script_path}")
     if os.path.exists(script_path):
-        subprocess.Popen([sys.executable, script_path])
-        sys.exit(0)
+        subprocess.Popen([sys.executable, script_path])  # Запуск програми
     else:
         print(f"Файл {script_path} не знайдено у репозиторії.")
         sys.exit(1)
@@ -44,7 +42,7 @@ def restart_program():
 if __name__ == "__main__":
     try:
         update_from_github(GITHUB_REPO, LOCAL_REPO_PATH)
-        restart_program()
+        run_program()  # Запускаємо програму
     except Exception as e:
         print(f"Помилка: {e}")
 
